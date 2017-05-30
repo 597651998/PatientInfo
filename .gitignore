@@ -1,0 +1,21 @@
+# Copyright (c) 2013, 2014, 2015 Stratus Technologies Bermuda Ltd.
+*.jar
+*.zip
+*.class
+/.metadata/
+target/
+.settings/
+.classpath
+.project
+build/
+Servers/
+.recommenders/
+demo/
+doctor*/
+taotao*/
+Ebuild*/
+PatientInfo/
+qw/
+.gitignore/
+RemoteSystemsTempFiles/
+generatorSqlmapCustom/

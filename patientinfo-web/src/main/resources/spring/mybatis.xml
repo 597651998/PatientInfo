@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="userInfo" type="org.com.model.User" />
+		<typeAlias alias="patientInfo" type="org.com.model.PatientInfo" />
+		<typeAlias alias="PatientInfoVo" type="org.com.model.PatientInfoVo" />
+		<typeAlias alias="GuaHao" type="org.com.model.GuaHao" />
+		<typeAlias alias="GuaHaoUser" type="org.com.model.GuahaoUser" />
+		<typeAlias alias="DoctorGuahao" type="org.com.model.DoctorGuahao" />
+		<typeAlias alias="HospitalInfo" type="org.com.model.HospitalInfo" />
+		<typeAlias alias="DoctorinfoUserCommond" type="org.com.model.DoctorinfoUserCommond" />
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="org/com/mapper/UserInfoMapper.xml" />
+		<mapper resource="org/com/mapper/patientInfoMapper.xml" />
+		<mapper resource="org/com/mapper/guahaoInfoMapper.xml" />
+	</mappers>
+</configuration> 

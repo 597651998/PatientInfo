@@ -1,0 +1,696 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.com.dao.UserDao.UserDao">
+	<!-- 查询所有用户 -->
+	<select id="userList"  resultType="userInfo">
+		SELECT userId,userName,password,role
+		FROM t_user 
+	</select>
+	<select id="selectByuserId"  resultType="userInfo">
+		SELECT *
+		FROM t_user 
+		where 
+		1=1
+		and 
+		userId = #{userId}
+	</select>
+		<!-- 查询所有用户 -->
+	<select id="QueryUserByName"  resultType="GuahaoUser">
+		SELECT *
+		FROM 
+		t_guahao_user 
+		where 
+		1=1
+		and 
+		guahaousername = #{guahaousername}
+	</select>
+	<!-- <insert id="insert" parameterType="hospital">
+		INSERT INTO hospital
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_id)">
+				hospital_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_name)">
+				hospital_name,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(org_type)">
+				org_type,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(reg_no)">
+				reg_no,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(rel_person)">
+				rel_person,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(lawer)">
+				lawer,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(cert_org)">
+				cert_org,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(bed_num)">
+				bed_num,
+			</if>
+			<if test="start_date != null and start_date != ''">
+				start_date,
+			</if>
+			<if test="end_date != null and end_date != ''">
+				end_date,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_level)">
+				hospital_level,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_type)">
+				hospital_type,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_level)">
+				group_level,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr)">
+				hospital_addr,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr2)">
+				hospital_addr2,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(number_addr)">
+				number_addr,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(tel)">
+				tel,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(fax)">
+				fax,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(website)">
+				website,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_logo)">
+				hospital_logo,
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_traffic)">
+				hospital_traffic,
+			</if>
+			<if test="longitude != null and longitude != ''">
+				longitude,
+			</if>
+			<if test="latitude != null and latitude != ''">
+				latitude,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(characteristic)">
+				characteristic,
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_summary)">
+				hospital_summary,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence)">
+				licence,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence_image)">
+				licence_image,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(status)">
+				status,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(delete_flag)">
+				delete_flag,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(is_any_trans)">
+				is_any_trans,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_id)">
+				parent_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(create_userid)">
+				create_userid,
+			</if>
+			<if test="create_time != null and create_time != ''">
+				create_time,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(update_userid)">
+				update_userid,
+			</if>
+			<if test="update_time != null and update_time != ''">
+				update_time,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(audit_userid)">
+				audit_userid,
+			</if>
+			<if test="audit_time != null and audit_time != ''">
+				audit_time,
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_id)">
+				#{hospital_id} || lpad(nextval('hms_id_seq') || '',5, '0'),
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_name)">
+				#{hospital_name},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_name)">
+				#{org_type},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(reg_no)">
+				#{reg_no},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(rel_person)">
+				#{rel_person},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(lawer)">
+				#{lawer},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(cert_org)">
+				#{cert_org},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(bed_num)">
+				#{bed_num},
+			</if>
+			<if test="start_date != null and start_date != ''">
+				#{start_date},
+			</if>
+			<if test="end_date != null and end_date != ''">
+				#{end_date},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_level)">
+				#{hospital_level},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_type)">
+				#{hospital_type},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_level)">
+				#{group_level},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr)">
+				#{hospital_addr},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr2)">
+				#{hospital_addr2},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(number_addr)">
+				#{number_addr},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(tel)">
+				#{tel},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(fax)">
+				#{fax},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(website)">
+				#{website},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_logo)">
+				#{hospital_logo},
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_traffic)">
+				#{hospital_traffic},
+			</if>
+			<if test="longitude != null and longitude != ''">
+				#{longitude},
+			</if>
+			<if test="latitude != null and latitude != ''">
+				#{latitude},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(characteristic)">
+				#{characteristic},
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_summary)">
+				#{hospital_summary},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence)">
+				#{licence},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence_image)">
+				#{licence_image},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(status)">
+				#{status},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(delete_flag)">
+				#{delete_flag},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(is_any_trans)">
+				#{is_any_trans},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_id)">
+				#{parent_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(create_userid)">
+				#{create_userid},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				#{create_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(update_userid)">
+				#{update_userid},
+			</if>
+			<if test="update_time != null and update_time != ''">
+				#{update_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(audit_userid)">
+				#{audit_userid},
+			</if>
+			<if test="audit_time != null and audit_time != ''">
+				#{audit_time},
+			</if>
+		</trim>
+	</insert>
+
+	批量新增医疗机构信息
+	<insert id="batchInsert" parameterType="java.util.List">
+		INSERT INTO hospital
+		(
+		hospital_id, hospital_name, org_type, reg_no, rel_person,
+		lawer, cert_org, bed_num, start_date, end_date, hospital_level,
+		hospital_type, group_level, hospital_addr, hospital_addr2,
+		number_addr, tel, fax, website, hospital_logo, hospital_traffic,
+		longitude, latitude, characteristic, hospital_summary, licence,
+		licence_image, status,delete_flag, is_any_trans, parent_id,
+		create_userid, create_time, update_userid, update_time,
+		audit_userid, audit_time
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.hospital_id} || lpad(nextval('hms_id_seq') || '', 5, '0'),
+			#{item.hospital_name}, 
+			#{item.org_type}, 
+			#{item.reg_no},
+			#{item.rel_person}, #{item.lawer},
+			#{item.cert_org}, 
+			#{item.bed_num}, 
+			#{item.start_date},
+			#{item.end_date}, #{item.hospital_level},
+			#{item.hospital_type}, #{item.group_level},
+			#{item.hospital_addr}, #{item.hospital_addr2},
+			#{item.number_addr}, #{item.tel}, #{item.fax},
+			#{item.website}, #{item.hospital_logo},
+			#{item.hospital_traffic}, #{item.longitude},
+			#{item.latitude}, #{item.characteristic},
+			#{item.hospital_summary}, #{item.licence},
+			#{item.licence_image}, #{item.status},
+			#{item.delete_flag}, #{item.is_any_trans},
+			#{item.parent_id}, #{item.create_userid},
+			#{item.create_time}, #{item.update_userid},
+			#{item.update_time}, #{item.audit_userid},
+			#{item.audit_time}
+			)
+		</foreach>
+	</insert>
+
+	更新医疗机构信息
+	<update id="update" parameterType="hospital">
+		UPDATE hospital
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_name)">
+				hospital_name = #{hospital_name},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(reg_no)">
+				reg_no = #{reg_no},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(rel_person)">
+				rel_person = #{rel_person},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(lawer)">
+				lawer = #{lawer},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(cert_org)">
+				cert_org = #{cert_org},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(bed_num)">
+				bed_num = #{bed_num},
+			</if>
+			<if test="start_date != null and start_date != ''">
+				start_date = #{start_date},
+			</if>
+			<if test="end_date != null and end_date != ''">
+				end_date = #{end_date},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_level)">
+				hospital_level = #{hospital_level},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_type)">
+				hospital_type = #{hospital_type},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_level)">
+				group_level = #{group_level},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr)">
+				hospital_addr = #{hospital_addr},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_addr2)">
+				hospital_addr2 = #{hospital_addr2},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(number_addr)">
+				number_addr = #{number_addr},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(tel)">
+				tel = #{tel},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(fax)">
+				fax = #{fax},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(website)">
+				website = #{website},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_logo)">
+				hospital_logo = #{hospital_logo},
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_traffic)">
+				hospital_traffic = #{hospital_traffic},
+			</if>
+			<if test="longitude != null and longitude != ''">
+				longitude = #{longitude},
+			</if>
+			<if test="latitude != null and latitude != ''">
+				latitude = #{latitude},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(characteristic)">
+				characteristic = #{characteristic},
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_summary)">
+				hospital_summary = #{hospital_summary},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence)">
+				licence = #{licence},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(licence_image)">
+				licence_image = #{licence_image},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(status)">
+				status = #{status},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(delete_flag)">
+				delete_flag = #{delete_flag},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(is_any_trans)">
+				is_any_trans = #{is_any_trans},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_id)">
+				parent_id = #{parent_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(create_userid)">
+				create_userid = #{create_userid},
+			</if>
+			<if test="create_time != null and create_time != ''">
+				create_time = #{create_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(update_userid)">
+				update_userid = #{update_userid},
+			</if>
+			<if test="update_time != null and update_time != ''">
+				update_time = #{update_time},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(audit_userid)">
+				audit_userid = #{audit_userid},
+			</if>
+			<if test="audit_time != null and audit_time != ''">
+				audit_time = #{audit_time},
+			</if>
+		</set>
+		WHERE hospital_id = #{hospital_id}
+	</update>
+
+	删除医疗机构信息
+	<delete id="delete" parameterType="java.lang.String">
+		DELETE FROM hospital where
+		hospital_id = #{hospital_id}
+	</delete>
+
+	根据医疗机构ID查询机构信息
+	<select id="queryById" parameterType="java.lang.String"
+		resultType="hospital">
+		SELECT *
+		FROM hospital
+		WHERE 
+		hospital_id = #{hospital_id}
+		AND delete_flag = '1'
+	</select>
+
+	根据医疗机构名称查询机构信息
+	<select id="queryByHospitalName" parameterType="java.lang.String"
+		resultType="hospital">
+		SELECT *
+		FROM hospital
+		WHERE 
+		hospital_name = #{hospital_name}
+		AND delete_flag = '1'
+	</select>
+
+	查询医疗机构信息列表
+	<select id="queryHospitals" parameterType="hospital" resultType="hospital">
+		SELECT h.hospital_id, 
+			   h.hospital_name, 
+			   h.reg_no, 
+			   h.rel_person, 
+			   h.lawer, 
+			   h.cert_org, 
+			   h.bed_num, 
+			   h.start_date, 
+			   h.end_date, 
+			   h.hospital_level,
+			   getItemName('hospitalLevel', h.hospital_level) hospitalLevelText, 
+			   h.hospital_type,
+			   getItemName('hospitalType', h.hospital_type) hospitalTypeText, 
+			   h.group_level,
+			   getItemName('groupLevel', h.group_level) groupLevelText, 
+			   h.hospital_addr,
+			   h.hospital_addr2,
+			   c.city_name || c1.city_name hospitalAddrText,
+			   h.hospital_addr2, 
+			   h.number_addr, 
+			   h.tel, 
+			   h.fax, 
+			   h.website, 
+			   h.hospital_logo, 
+			   h.hospital_traffic,
+		       h.longitude, 
+		       h.latitude, 
+		       h.characteristic, 
+		       h.hospital_summary, 
+		       h.licence, 
+		       h.licence_image, 
+		       h.status,
+			   h.delete_flag, 
+			   h.is_any_trans, 
+			   h.parent_id, 
+			   h.create_userid, 
+			   h.create_time, 
+			   h.update_userid, 
+			   h.update_time,
+			   h.audit_userid, 
+			   h.audit_time, 
+			   h.org_type
+		FROM hospital h
+		LEFT JOIN cities c ON h.hospital_addr = c.city_id
+		LEFT JOIN cities c1 ON h.hospital_addr2 = c1.city_id
+		WHERE
+		1 = 1
+		AND h.delete_flag = '1'
+		AND org_type = '2'
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.hospital_id)">
+			AND hospital_id = #{hospital.hospital_id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.hospital_name)">
+			AND hospital_name LIKE '%'||#{hospital.hospital_name}||'%'
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.parent_id)">
+			AND h.parent_id = #{hospital.parent_id}
+		</if>
+		ORDER BY create_time DESC
+		LIMIT #{pageSize} OFFSET #{pageSize}*(#{pageNumber}-1)
+	</select>
+
+	统计医疗机构信息总记录数
+	<select id="count" parameterType="hospital" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		FROM hospital
+		WHERE
+		1 = 1
+		AND delete_flag = '1'
+		AND org_type = '2'
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.hospital_id)">
+			AND hospital_id = #{hospital.hospital_id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.hospital_name)">
+			AND hospital_name LIKE '%'||#{hospital.hospital_name}||'%'
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital.parent_id)">
+			AND parent_id = #{hospital.parent_id}
+		</if>
+	</select>
+	
+	查询上级医院信息
+	<select id="getParentHospitalInfo" parameterType="java.lang.String" resultType="hospital">
+		SELECT * 
+		FROM hospital 
+		WHERE delete_flag = '1' and
+		hospital_id = 
+		(SELECT parent_hospital_id FROM hospital_group_rel WHERE hospital_id = #{hospital_id})
+	</select>
+
+	查询所有医疗机构列表
+	<select id="queryList" resultType="hospital">
+		SELECT *
+		FROM hospital where delete_flag = '1'
+	</select>
+
+	===========医联体签收约关系Mapper============
+	新增签约关系
+	<insert id="insertHospitalGroupRel" parameterType="java.util.List">
+		INSERT INTO hospital_group_rel
+		(
+		id,
+		group_id,
+		hospital_id,
+		parent_hospital_id,
+		rel_time
+		)
+		VALUES
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(
+			#{item.id},
+			#{item.group_id},
+			#{item.hospital_id},
+			#{item.parent_hospital_id},
+			#{item.rel_time}
+			)
+		</foreach>
+	</insert>
+
+	删除签约关系
+	<delete id="deleteHospitalGroupRel" parameterType="com.witontek.hms.domain.hospital.HospitalGroupRel">
+		DELETE FROM hospital_group_rel
+		WHERE
+		1 = 1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(id)">
+			AND id = #{id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_id)">
+			AND group_id = #{group_id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_id)">
+			AND hospital_id = #{hospital_id}
+		</if>
+		<if
+			test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_hospital_id)">
+			AND parent_hospital_id = #{parent_hospital_id}
+		</if>
+		<if test="rel_time != null and rel_time != ''">
+			AND to_char(rel_time, 'yyyy-MM-dd') = #{rel_time}
+		</if>
+	</delete>
+
+	更新签约关系
+	<update id="updateHospitalGroupRel" parameterType="com.witontek.hms.domain.hospital.HospitalGroupRel">
+		UPDATE hospital_group_rel
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_id)">
+				group_id = #{group_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_id)">
+				hospital_id = #{hospital_id},
+			</if>
+			<if
+				test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_hospital_id)">
+				parent_hospital_id = #{parent_hospital_id},
+			</if>
+			<if test="rel_time != null and rel_time != ''">
+				rel_time = #{rel_time},
+			</if>
+		</set>
+		WHERE
+		1 = 1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(id)">
+			AND id = #{id}
+		</if>
+	</update>
+
+	查询签约关系列表
+	<select id="queryHospitalGroupRels" parameterType="com.witontek.hms.domain.hospital.HospitalGroupRel"
+		resultType="com.witontek.hms.domain.hospital.HospitalGroupRel">
+		SELECT * 
+		FROM hospital_group_rel
+		WHERE 
+		1 = 1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(id)">
+			AND id = #{id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(group_id)">
+			AND group_id = #{group_id}
+		</if>
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(hospital_id)">
+			AND hospital_id = #{hospital_id}
+		</if>
+		<if
+			test="@org.apache.commons.lang.StringUtils@isNotBlank(parent_hospital_id)">
+			AND parent_hospital_id = #{parent_hospital_id}
+		</if>
+		<if test="rel_time != null and rel_time != ''">
+			AND to_char(rel_time, 'yyyy-MM-dd') = #{rel_time}
+		</if>
+	</select>
+	
+	通过用户登录名查询所属机构详细信息
+	<select id="queryByUserId" parameterType="java.lang.String" resultType="hospital">
+		select h.* from hospital h, userinfo u where h.hospital_id=u.hospital_id and u.user_id=#{user_id} and h.delete_flag = '1'
+	</select>
+
+	根据卫生局ID查询下辖医院
+	<select id="queryByParentId" parameterType="java.lang.String" resultType="hospital">
+		select * from hospital where parent_id=#{parent_id} and org_type='2' and delete_flag = '1'
+	</select>
+	
+	查询可转诊医院列表
+	<select id="queryReferralHosList" parameterType="hospital" resultType="hospital">
+		select hh.* from hospital hh,
+		(select case when #{group_level}='3' then hospital_id else parent_hospital_id end hospital_id 
+			from hospital_group_rel hgr where case when #{group_level}='3' then hgr.parent_hospital_id else hgr.hospital_id end =#{hospital_id}
+			union 
+			select hospital_id from hospital h where is_any_trans = '1' and group_level='3' and 1=case when #{group_level}='1' then 0 else 1 end
+		) hosId
+		where hh.hospital_id=hosId.hospital_id and hh.delete_flag = '1'
+	</select>
+	
+	查询医生对应用户的所有职业机构
+	<select id="queryWorkHospitalsByUserId" parameterType="java.lang.String" resultType="hospital">
+		select h.* from hospital h, doctor_hosgrp_rel dhr, doctor d 
+		where h.hospital_id=dhr.hospital_id and h.delete_flag = '1'
+		and dhr.doctor_id=d.doctor_id and d.user_id=#{user_id}
+		union all
+		select h.* from hospital h, userinfo u 
+		where h.hospital_id=u.hospital_id 
+		and u.user_id=#{user_id} and h.delete_flag = '1'
+	</select>
+	
+	根据医院级别查询医院列表
+	<select id="groupLevelHosList" parameterType="hospital" resultType="hospital">
+		select * from hospital h where parent_id = #{parent_id} and group_level=#{group_level} and h.delete_flag = '1'
+		and not exists (
+			select 1 from hospital_group_rel hgr 
+			where hgr.hospital_id= h.hospital_id 
+				and parent_hospital_id= case when #{group_level}='1' or #{group_level}='2' then parent_hospital_id else #{hospital_id} end
+		)
+	</select>
+	
+	根据医生ID查询医疗机构所属医疗机构信息
+	<select id="queryByDoctorId" parameterType="java.lang.String" resultType="hospital">
+		SELECT * 
+		FROM hospital 
+		WHERE 
+		hospital_id = 
+			(
+				SELECT hospital_id 
+				FROM doctor 
+				WHERE doctor_id = #{doctor_id}
+			)
+	</select> -->
+	
+</mapper>

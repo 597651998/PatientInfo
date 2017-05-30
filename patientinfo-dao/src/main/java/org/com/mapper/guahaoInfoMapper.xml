@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.com.dao.guahaoDao.GuaHaoDao">
+	<insert id="guahaoAdd" parameterType="GuaHao">
+		INSERT INTO t_guahao
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Id)">
+				g_Id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(id)">
+				id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(userName)">
+				userName,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(patientName)">
+				patientName,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(sex)">
+				sex,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(idNumber)">
+				idNumber,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_officeName)">
+				g_officeName,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Desc)">
+				g_Desc,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_tiem)">
+				g_tiem
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Id)">
+				#{g_Id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(id)">
+				#{id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(userName)">
+				#{userName},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(patientName)">
+				#{patientName},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(sex)">
+				#{sex},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(idNumber)">
+				#{idNumber},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_officeName)">
+				#{g_officeName},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Desc)">
+				#{g_Desc},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_tiem)">
+				#{g_tiem}
+			</if>
+		</trim>
+	</insert>
+	<!-- 查询所有患者 -->
+	<select id="guahao_list" resultType="GuaHao">
+		select * from t_guahao
+	</select>
+	<delete id="guahaoDel" parameterType="java.util.List">
+		delete from t_guahao where g_Id in
+		<foreach collection="list" item="g_Id" open="(" close=")"
+			separator=",">
+			#{g_Id,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+	
+	<!-- 修改掛號信息 -->
+	<update id="updateguahaoinfonById" parameterType="GuaHaoUser">
+		UPDATE t_guahao_user
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaousername)">
+				guahaousername=#{guahaousername},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(idCard)">
+				idCard=#{idCard},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(phoneNumber)">
+				phoneNumber=#{phoneNumber},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaoemail)">
+				guahaoemail=#{guahaoemail}
+			</if>
+		</set>
+		WHERE
+		1 = 1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(user_id)">
+			AND user_id = #{user_id}
+		</if>
+	</update>
+	<!-- 修改掛號信息 -->
+	<update id="guahao_upd" parameterType="GuaHao">
+		UPDATE t_guahao
+		<set>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(patientName)">
+				patientName=#{patientName},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_officeName)">
+				g_officeName=#{g_officeName},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Desc)">
+				g_Desc=#{g_Desc},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_tiem)">
+				g_tiem=#{g_tiem}
+			</if>
+		</set>
+		WHERE
+		1 = 1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(g_Id)">
+			AND g_Id = #{g_Id}
+		</if>
+	</update>
+
+	<!-- 前端用户数据sql -->
+	<insert id="guahao_User_save" parameterType="GuaHaoUser">
+		INSERT INTO t_guahao_user
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(user_id)">
+				user_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(idCard)">
+				idCard,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(phoneNumber)">
+				phoneNumber,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(isReally)">
+				isReally,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_Desc)">
+				guahao_Desc,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaousername)">
+				guahaousername,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaopassword)">
+				guahaopassword,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaoemail)">
+				guahaoemail,
+			</if>
+				<if test="@org.apache.commons.lang.StringUtils@isNotBlank(isManager)">
+				isManager
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(user_id)">
+				#{user_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(idCard)">
+				#{idCard},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(phoneNumber)">
+				#{phoneNumber},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(isReally)">
+				#{isReally},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_Desc)">
+				#{guahao_Desc},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaousername)">
+				#{guahaousername},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaopassword)">
+				#{guahaopassword},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahaoemail)">
+				#{guahaoemail},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(isManager)">
+				#{isManager}
+			</if>
+		</trim>
+	</insert>
+	
+	<!-- 查询所有医生根据医院 -->
+	<select id="DoctorGuahao_list" resultType="DoctorGuahao" parameterType="DoctorGuahao">
+		select * from t_guahao_doctor
+		where 1=1
+		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(doctorhospital)">
+		and doctorhospital = #{doctorhospital};
+		</if>
+	</select>
+	
+		<!-- 查询所有医院 -->
+	<select id="findhostpital_list" resultType="HospitalInfo">
+		select * from t_guahao_hospitalinfo
+	</select>
+	
+	<!-- 添加一个挂号单 -->
+	<insert id="guahaoinfo_save" parameterType="DoctorinfoUserCommond">
+		INSERT INTO t_guahaoinfo
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_id)">
+				guahao_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(user_id)">
+				user_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(doctor_id)">
+				doctor_id,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(quren_guahaotime)">
+				quren_guahaotime,
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_flag)">
+				guahao_flag
+			</if>
+		</trim>
+		VALUES
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_id)">
+				#{guahao_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(user_id)">
+				#{user_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(doctor_id)">
+				#{doctor_id},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(quren_guahaotime)">
+				#{quren_guahaotime},
+			</if>
+			<if test="@org.apache.commons.lang.StringUtils@isNotBlank(guahao_flag)">
+				#{guahao_flag}
+			</if>
+		</trim>
+	</insert>
+	
+		<!-- 查询所有挂号单 -->
+	<select id="guahaoinfo_select" resultType="DoctorinfoUserCommond">
+		select * from t_guahaoinfo
+		where guahao_flag = '1';
+	</select>
+	
+		<!-- 查询用户的所有挂号单 -->
+<!-- 	<select id="guahaoinfo_findByUserId" parameterType="">
+		select * from t_guahaoinfo
+		where 
+		1=1
+		and
+		
+		guahao_flag = '1';
+	</select> -->
+</mapper>
