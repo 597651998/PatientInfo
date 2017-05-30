@@ -53,6 +53,7 @@ pre {
 	function A() {
 		window.location.href = "http://localhost:8080/patientinfo-web/indexlogin.jsp";
 	}
+	
 	$(function() {
 		setTimeout('A()', 3000); //延迟3秒
 	})
