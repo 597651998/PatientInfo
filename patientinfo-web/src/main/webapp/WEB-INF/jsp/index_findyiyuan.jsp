@@ -16,7 +16,7 @@
 	href="../css/jquery.datetimepicker.css" />
 <script src="../js/xq_navbar.js" type="text/javascript"></script>
 <link rel="stylesheet" type="text/css" href="../css/zeroModal.css" />
-    <script src="../js/zeroModal.js"></script>
+<script src="../js/zeroModal.js"></script>
 <script type="text/javascript" src="../js/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="../js/easyui-lang-zh_CN.js"></script>
 <script src="../js/jquery.datetimepicker.full.js"></script>
@@ -210,8 +210,7 @@
 				function() {
 					className = $(this).attr('class');
 					$('#dialogBg').fadeIn(300);
-					$('#dialog').removeAttr('class').addClass(
-							'animated ' + className + '').fadeIn();
+					$('#dialog').removeAttr('class').addClass('animated ' + className + '').fadeIn();
 				});
 
 		$('.claseDialogBtn').click(function() {
@@ -223,12 +222,10 @@
 	//查询对应医院医生
 	function searchGh() {
 		var hospitalName = $('#hospitalName').combobox('getValue');
-		$("#dg")
-				.datagrid(
-						{
+		$("#dg").datagrid({
 							queryParams : {
 								'hospitalName' : hospitalName
-							},
+								},
 							url : "http://localhost:8080/patientinfo-web/user/index_findByhospital",
 							method : "POST"
 						});
@@ -245,20 +242,20 @@
 		getSrceenWH();
 	}
 	$(window).resize();
-	
+
 	//二层弹出
 	function _button() {
-        zeroModal.show({	
-        	title: '提示',
-            content: '预约成功，点击确定后跳转到首页',
-            ok: true,
-            okFn: function(opt) {
-            	//点击ok后的事件
-            	window.location.href="http://localhost:8080/patientinfo-web/index_user.jsp";
-                return false;
-            }
-        });
-    }
+		zeroModal.show({
+					title : '提示',
+					content : '预约成功，点击确定后跳转到首页',
+					ok : true,
+					okFn : function(opt) {
+						//点击ok后的事件
+						window.location.href = "http://localhost:8080/patientinfo-web/index_user.jsp";
+						return false;
+					}
+				});
+	}
 
 	$(function() {
 
@@ -303,14 +300,13 @@
 							infoUserCommond.doctor_id = doctor_id;
 							infoUserCommond.user_id = user_id;
 							infoUserCommond.quren_guahaotime = quren_guahaotime;
-							$
-									.ajax({
+							$.ajax({
 										url : 'http://localhost:8080/patientinfo-web/user/index_guahaosaveinfo',
 										type : 'post',
 										data : infoUserCommond,
 										success : function() {
 											_button();
-											setTimeout("fun()",5000); 
+											setTimeout("fun()", 5000);
 										},
 									});
 						});
@@ -418,14 +414,23 @@ ul, ol {
 	<div class="xq_bag" id="bar2">
 
 		<ul class="xq_navbar">
-			<li class="xq_navli"><a href="#">首页</a></li>
+			<li class="xq_navli"><a
+				href="http://localhost:8080/patientinfo-web/index_user.jsp">首页</a></li>
 			<li class="xq_navli"><a href="#">新闻中心</a></li>
-			<li class="xq_navli"><a href="#">预防接种</a></li>
-			<li class="xq_navli"><a href="#">预约挂号</a></li>
-			<li class="xq_navli"><a href="#">在线留言</a></li>
+			<li class="xq_navli"><a
+				href="http://localhost:8080/patientinfo-web/show/myselfMessage">个人中心</a></li>
+			<li class="xq_navli"><a href="index_guahao.jsp">预约挂号</a></li>
+
+			<li class="xq_navli"><a
+				href="http://localhost:8080/patientinfo-web/Message.jsp">意见反馈</a></li>
 			<li class="xq_navli"><a href="#">系统简介</a></li>
 		</ul>
-
+		<script>
+			$(".xq_navli a").on('click', function() {
+				var url = $(this).attr("href")
+				window.location.href = url;
+			})
+		</script>
 	</div>
 	<div class="banner" id="b04">
 		<ul>

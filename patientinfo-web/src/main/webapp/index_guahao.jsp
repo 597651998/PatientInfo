@@ -290,14 +290,19 @@ ul, ol {
 	<div class="xq_bag" id="bar2">
 
 		<ul class="xq_navbar">
-			<li class="xq_navli"><a href="#">首页</a></li>
+			<li class="xq_navli"><a href="http://localhost:8080/patientinfo-web/index_user.jsp">首页</a></li>
 			<li class="xq_navli"><a href="#">新闻中心</a></li>
-			<li class="xq_navli"><a href="#">预防接种</a></li>
-			<li class="xq_navli"><a href="#">预约挂号</a></li>
-			<li class="xq_navli"><a href="#">在线留言</a></li>
+			<li class="xq_navli"><a href="show/myselfMessage">个人中心</a></li>
+			<li class="xq_navli"><a href="index_guahao.jsp">预约挂号</a></li>
+		<li class="xq_navli"><a href="http://localhost:8080/patientinfo-web/Message.jsp">意见反馈</a></li>
 			<li class="xq_navli"><a href="#">系统简介</a></li>
 		</ul>
-
+		<script>
+			$(".xq_navli a").on('click', function() {
+				var url = $(this).attr("href")
+				window.location.href = url;
+			})
+		</script>
 	</div>
 	<div class="banner" id="b04">
 		<ul>

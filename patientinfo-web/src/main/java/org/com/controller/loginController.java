@@ -8,14 +8,17 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.zookeeper.server.Request;
 import org.apache.zookeeper.server.SessionTracker.Session;
+import org.com.constant.ChangePassConstant;
 import org.com.dao.PatientInfoDao.PatientInfoDao;
 import org.com.dao.UserDao.UserDao;
 import org.com.dao.guahaoDao.GuaHaoDao;
 import org.com.model.User;
+import org.com.model.ChangePass;
 import org.com.model.DoctorGuahao;
 import org.com.model.DoctorinfoUserCommond;
 import org.com.model.GuahaoByUserIdCommond;
 import org.com.model.GuahaoUser;
+import org.com.model.Message;
 import org.com.model.PatientInfo;
 import org.com.model.PatientInfoVo;
 import org.com.util.StringUtil;
@@ -112,6 +115,10 @@ public class loginController {
 		// 创建一个展示个人挂号信息的集合
 		List<GuahaoByUserIdCommond> listinfoUser = new ArrayList<>();
 		GuahaoUser attribute = (GuahaoUser) session.getAttribute("userinfo");
+		
+		if(attribute==null){
+			return"timeout";
+		}
 		String user_id = attribute.getUser_id();
 		String d_id;
 		List<DoctorinfoUserCommond> list = guahaodao.finguahaoinfonByUserId(user_id);
@@ -119,6 +126,10 @@ public class loginController {
 			d_id = doctorinfoUserCommond.getDoctor_id();
 			saveCommond(d_id, doctorinfoUserCommond, listinfoUser);
 		}
+		//绑定提交的意见
+		List<Message> idearsinfo= guahaodao.finAllMessage(attribute.getUser_id());
+		model.addAttribute("idearsinfo",idearsinfo);
+		
 		model.addAttribute("messasgeinfo", listinfoUser);
 		return "showmyselfMessage";
 	}
@@ -135,6 +146,32 @@ public class loginController {
 		return "delesuccess";
 	}
 	
+	
+	/**
+	 * 个人中心删除挂号信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/show/deletemyselfideaMessage")
+	@ResponseBody
+	public String deletemyselfideaMessage(String id) throws Exception {
+		guahaodao.deletemessageinfonById(id);
+		return "delesuccess";
+	}
+	
+	/**
+	 * 查看详情
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/show/findmessageByid")
+	@ResponseBody
+	public Message findmessageByid(String id) throws Exception {
+		Message message=	guahaodao.findmessageByid(id);
+		return message;
+	}
 	/**
 	 * 个人中心修改挂号信息
 	 * 
@@ -247,5 +284,37 @@ public class loginController {
 	public @ResponseBody Object updatePatient(PatientInfoVo patientinfovo) throws Exception {
 		patientdao.updatePatient(patientinfovo);
 		return null;
+	}
+	
+	/**
+	 * 意见与反馈
+	 */
+	@RequestMapping(value = "/saveMessage")
+	public  Object saveMessage(Message message,HttpSession session) throws Exception {
+		GuahaoUser userinfo=(GuahaoUser) session.getAttribute("userinfo");
+		message.setUser_id(userinfo.getUser_id());
+		message.setMessage_flag("1");
+		patientdao.saveMessage(message);
+		return "successmessage";
+	}
+	
+	/**
+	 * 修改密码
+	 */
+	@RequestMapping(value = "/show/cheganemyselfpass")
+	@ResponseBody
+	public  Object cheganemyselfpass(Message message,HttpSession session,ChangePass changepass) throws Exception {
+		GuahaoUser userinfo=(GuahaoUser) session.getAttribute("userinfo");
+		if(userinfo.getUser_id()==null){
+			return ChangePassConstant.LOGIN_TIME_OUT;
+		}else{
+			changepass.setUser_id(userinfo.getUser_id());
+		}
+		if(changepass.getOld_pass().equals(userinfo.getGuahaopassword())){
+			patientdao.updateUserPass(changepass);
+			return ChangePassConstant.CHANGE_PASS_SUCCESS;
+		}else{
+			return ChangePassConstant.OLD_PASS_ERROR;
+		}
 	}
 }

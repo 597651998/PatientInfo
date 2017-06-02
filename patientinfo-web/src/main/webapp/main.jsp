@@ -39,10 +39,17 @@
 					url:"guahaoManage.jsp"
 				}
 			},{
-				text:"挂号报表统计",
+				text:"医生管理",
 				iconCls:"icon-chart",
 				attributes:{
-					url:"chart.jsp"
+					url:"showDoctor.jsp"
+				}
+			
+			},{
+				text:"新增管理",
+				iconCls:"icon-chart",
+				attributes:{
+					url:"addnewDoctor.jsp"
 				}
 			
 			},]

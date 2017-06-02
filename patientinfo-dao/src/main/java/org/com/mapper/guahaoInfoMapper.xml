@@ -74,6 +74,14 @@
 			#{g_Id,jdbcType=VARCHAR}
 		</foreach>
 	</delete>
+	<update id="DoctorDel" parameterType="java.util.List">
+		update t_guahao_doctor set doctor_flag = '2' where doctor_id in
+		<foreach collection="list" item="doctor_id" open="(" close=")"
+			separator=",">
+			#{doctor_id,jdbcType=VARCHAR}
+		</foreach>
+	</update>
+	
 	
 	<!-- 修改掛號信息 -->
 	<update id="updateguahaoinfonById" parameterType="GuaHaoUser">
@@ -190,9 +198,12 @@
 	<select id="DoctorGuahao_list" resultType="DoctorGuahao" parameterType="DoctorGuahao">
 		select * from t_guahao_doctor
 		where 1=1
+		and
+		doctor_flag = '1'
 		<if test="@org.apache.commons.lang.StringUtils@isNotBlank(doctorhospital)">
 		and doctorhospital = #{doctorhospital};
 		</if>
+		
 	</select>
 	
 		<!-- 查询所有医院 -->

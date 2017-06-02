@@ -13,6 +13,8 @@ public class DoctorGuahao {
 	private String doctorhospital; // 医生归属医院
 	
 	private String guahaomoney;//费用
+	
+	private String doctor_flag;//逻辑删除医生
 
 	public String getDoctorName() {
 		return doctorName;
@@ -62,6 +64,15 @@ public class DoctorGuahao {
 
 	public void setGuahaomoney(String guahaomoney) {
 		this.guahaomoney = guahaomoney;
+	}
+
+	
+	public String getDoctor_flag() {
+		return doctor_flag;
+	}
+
+	public void setDoctor_flag(String doctor_flag) {
+		this.doctor_flag = doctor_flag;
 	}
 
 	@Override

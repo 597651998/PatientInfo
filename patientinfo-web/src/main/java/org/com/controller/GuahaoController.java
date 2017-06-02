@@ -76,6 +76,12 @@ public class GuahaoController {
 		guahaodao.guahaoDel(list);
 		return null;
 	}
+	@RequestMapping(value = "/doctor_del")
+	public @ResponseBody Object doctor_del(String[] id) throws Exception {
+		List list = Arrays.asList(id);
+		guahaodao.DoctorDel(list);
+		return null;
+	}
 
 	/**
 	 * 修改选中的病人
@@ -117,6 +123,31 @@ public class GuahaoController {
 	@RequestMapping(value = "/user/index_findAllhospital")
 	public @ResponseBody Object findAllhospital() throws Exception {
 		return guahaodao.findhostpital_list();
+	}
+	/**
+	 * 展示所有医生
+	 * @return
+	 * @throws Exception
+	 */
+	@RequestMapping(value = "/doctor/doctor_findAllhospital")
+	public @ResponseBody Object findAlldoctor() throws Exception {
+		List<DoctorGuahao> findAlldoctor = guahaodao.findAlldoctor();
+		System.out.println(findAlldoctor);
+		return findAlldoctor;
+	}
+	/**
+	 * 添加医生
+	 * 
+	 * @param patient
+	 * @return
+	 * @throws Exception
+	 */
+	// 删除可以改为逻辑删除，给数据设置一个属性，当改属性为1时前端展示，2时不展示，此时删除直接修改12即可
+	@RequestMapping(value = "/doctor_save")
+	public @ResponseBody Object doctor_save(DoctorGuahao doctorguahao) throws Exception {
+		doctorguahao.setDoctor_flag("1");
+		guahaodao.doctorSave(doctorguahao);
+		return null;
 	}
 	
 	/**

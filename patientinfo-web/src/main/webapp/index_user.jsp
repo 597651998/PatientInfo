@@ -320,14 +320,15 @@ ul, ol {
 			<li class="xq_navli"><a href="#">新闻中心</a></li>
 			<li class="xq_navli"><a href="show/myselfMessage">个人中心</a></li>
 			<li class="xq_navli"><a href="index_guahao.jsp">预约挂号</a></li>
-			<script>
+	
+			<li class="xq_navli"><a href="Message.jsp">意见反馈</a></li>
+			<li class="xq_navli"><a href="#">系统简介</a></li>
+					<script>
 				$(".xq_navli a").on('click',function (){
 					var url = $(this).attr("href")
 					window.location.href = url;
 				})
 			</script>
-			<li class="xq_navli"><a href="#">在线留言</a></li>
-			<li class="xq_navli"><a href="#">系统简介</a></li>
 		</ul>
 
 	</div>
