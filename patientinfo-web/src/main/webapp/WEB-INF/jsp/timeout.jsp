@@ -55,7 +55,7 @@ pre {
 	}
 	
 	$(function() {
-		setTimeout('A()', 3000); //延迟3秒
+		setTimeout('A()', 5000); //延迟3秒
 	})
 	$('#shclNs').shCircleLoader({
 		namespace : "myns",

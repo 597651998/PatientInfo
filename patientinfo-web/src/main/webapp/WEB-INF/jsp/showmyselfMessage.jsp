@@ -13,7 +13,15 @@
 </head>
 
 <body>
-
+	<div style="float: right;margin-right: 15%;margin-top: 5%">
+		<!-- Contextual button for informational alert messages -->
+		<button type="button" onclick="returnindex()" class="btn btn-info">点击返回首页</button>
+		<script type="text/javascript">
+		function returnindex(){
+			window.location.href = "http://localhost:8080/patientinfo-web/index_user.jsp";
+		}
+		</script>
+	</div>
 	<ul id="nav">
 
 		<li class="current"><a href="#intro">我的账户</a></li>
@@ -170,13 +178,12 @@
 							<br />
 							<div style="text-align: center;">
 
-								<button type="button" onclick="updateUser()"
-									class="btn btn-default">确认修改</button>
+								<button type="button" id="update_btn" class="btn btn-default">确认修改</button>
 
 							</div>
 						</form>
 						<script type="text/javascript">
-						function updateUser(){
+						$("#update_btn").on('click',function(){
 							var GuahaoUser = {};
 							GuahaoUser.user_id =${userinfo.user_id};
 							GuahaoUser.guahaousername =$(" input[ name='guahaousername' ]").val();
@@ -192,14 +199,17 @@
 								  success: function(msg){
 									  if(msg)
 										  $("#132").trigger("click")
-										  setTimeout(function () {
+									/* 	  setTimeout(function () {
 											  	 window.location.reload();
-											  }, 3000); //延迟3秒
+											  }, 3000); //延迟3秒 */
 										 
 								}
 
 							});
-						}
+						});
+						/* function updateUser(){
+						
+						} */
 						</script>
 					</div>
 

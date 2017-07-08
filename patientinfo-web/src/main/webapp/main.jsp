@@ -45,14 +45,7 @@
 					url:"showDoctor.jsp"
 				}
 			
-			},{
-				text:"新增管理",
-				iconCls:"icon-chart",
-				attributes:{
-					url:"addnewDoctor.jsp"
-				}
-			
-			},]
+			}]
 		}];
 		
 		// 实例化树菜单
